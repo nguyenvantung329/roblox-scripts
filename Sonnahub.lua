@@ -126,6 +126,15 @@ ScriptTab:CreateButton({
 
 })
 
+ScriptTab:CreateButton({
+    Name = "Infinite Yield",
+    Callback = function()
+        loadstring(game:HttpGet(
+            "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"
+        ))()
+    end
+})
+
 --==============================
 
 -- HUMANOID SAFE
