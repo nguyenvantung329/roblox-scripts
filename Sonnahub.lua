@@ -86,7 +86,7 @@ Name = "Sonna Hub | Rayfield",
 
 LoadingTitle = "Sonna Hub",
 
-LoadingSubtitle = "@toiikhongbietgica",
+LoadingSubtitle = "Rayfield UI",
 
 ConfigurationSaving = { Enabled = false },
 
@@ -110,64 +110,6 @@ local ScriptTab = Window:CreateTab("Script", 6023426926)
 
 ScriptTab:CreateSection("Scripts")
 
-local AnimationTab = Window:CreateTab("Animation", 6034287516)
-
-AnimationTab:CreateSection("R6 Poses")
-
-local sitAnimTrack
-local layAnimTrack
-
-local function stopAllAnim()
-    if sitAnimTrack then sitAnimTrack:Stop() sitAnimTrack = nil end
-    if layAnimTrack then layAnimTrack:Stop() layAnimTrack = nil end
-end
-
-AnimationTab:CreateToggle({
-    Name = "Sit",
-    CurrentValue = false,
-    Callback = function(v)
-        stopAllAnim()
-        if v then
-            local hum = getHumanoid()
-            local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://2506281703"
-            sitAnimTrack = hum:LoadAnimation(anim)
-            sitAnimTrack.Looped = true
-            sitAnimTrack:Play()
-        end
-    end
-})
-
-AnimationTab:CreateToggle({
-    Name = "Lay Down",
-    CurrentValue = false,
-    Callback = function(v)
-        stopAllAnim()
-        if v then
-            local hum = getHumanoid()
-            local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://282574440"
-            layAnimTrack = hum:LoadAnimation(anim)
-            layAnimTrack.Looped = true
-            layAnimTrack:Play()
-        end
-    end
-})
-
-local sitAnimTrack
-local layAnimTrack
-
-local function stopAllAnim()
-    if sitAnimTrack then
-        sitAnimTrack:Stop()
-        sitAnimTrack = nil
-    end
-    if layAnimTrack then
-        layAnimTrack:Stop()
-        layAnimTrack = nil
-    end
-end
-
 ScriptTab:CreateButton({
 
     Name = "Fly GUI V3",
@@ -184,14 +126,6 @@ ScriptTab:CreateButton({
 
 })
 
-ScriptTab:CreateButton({
-    Name = "Infinite Yield",
-    Callback = function()
-        loadstring(game:HttpGet(
-            "https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"
-        ))()
-    end
-})
 --==============================
 
 -- HUMANOID SAFE
