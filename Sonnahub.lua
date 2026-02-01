@@ -118,6 +118,46 @@ local sitAnimTrack
 local layAnimTrack
 
 local function stopAllAnim()
+    if sitAnimTrack then sitAnimTrack:Stop() sitAnimTrack = nil end
+    if layAnimTrack then layAnimTrack:Stop() layAnimTrack = nil end
+end
+
+AnimationTab:CreateToggle({
+    Name = "Sit",
+    CurrentValue = false,
+    Callback = function(v)
+        stopAllAnim()
+        if v then
+            local hum = getHumanoid()
+            local anim = Instance.new("Animation")
+            anim.AnimationId = "rbxassetid://2506281703"
+            sitAnimTrack = hum:LoadAnimation(anim)
+            sitAnimTrack.Looped = true
+            sitAnimTrack:Play()
+        end
+    end
+})
+
+AnimationTab:CreateToggle({
+    Name = "Lay Down",
+    CurrentValue = false,
+    Callback = function(v)
+        stopAllAnim()
+        if v then
+            local hum = getHumanoid()
+            local anim = Instance.new("Animation")
+            anim.AnimationId = "rbxassetid://282574440"
+            layAnimTrack = hum:LoadAnimation(anim)
+            layAnimTrack.Looped = true
+            layAnimTrack:Play()
+        end
+    end
+})
+
+local sitAnimTrack
+local layAnimTrack
+
+local function stopAllAnim()
     if sitAnimTrack then
         sitAnimTrack:Stop()
         sitAnimTrack = nil
@@ -1046,66 +1086,4 @@ ToolsTab:CreateKeybind({
 
     end
 
-})
-
-AnimationTab:CreateToggle({
-    Name = "Lay Down (R6)",
-    CurrentValue = false,
-    Callback = function(v)
-        local hum = getHumanoid()
-        if hum.RigType ~= Enum.HumanoidRigType.R6 then
-            Rayfield:Notify({
-                Title = "Sonna Hub",
-                Content = "Lay Down (R6) chỉ dùng cho R6",
-                Duration = 3
-            })
-            return
-        end
-
-        if v then
-            stopAllAnim()
-
-            local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://180435571" -- R6 Lay
-            layAnimTrack = hum:LoadAnimation(anim)
-            layAnimTrack.Looped = true
-            layAnimTrack:Play()
-        else
-            if layAnimTrack then
-                layAnimTrack:Stop()
-                layAnimTrack = nil
-            end
-        end
-    end
-})
-
-AnimationTab:CreateToggle({
-    Name = "Sit (R6)",
-    CurrentValue = false,
-    Callback = function(v)
-        local hum = getHumanoid()
-        if hum.RigType ~= Enum.HumanoidRigType.R6 then
-            Rayfield:Notify({
-                Title = "Sonna Hub",
-                Content = "Sit (R6) chỉ dùng cho R6",
-                Duration = 3
-            })
-            return
-        end
-
-        if v then
-            stopAllAnim()
-
-            local anim = Instance.new("Animation")
-            anim.AnimationId = "rbxassetid://2506281703" -- R6 Sit
-            sitAnimTrack = hum:LoadAnimation(anim)
-            sitAnimTrack.Looped = true
-            sitAnimTrack:Play()
-        else
-            if sitAnimTrack then
-                sitAnimTrack:Stop()
-                sitAnimTrack = nil
-            end
-        end
-    end
 })
